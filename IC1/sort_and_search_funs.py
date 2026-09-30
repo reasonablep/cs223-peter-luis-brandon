@@ -91,3 +91,59 @@ def selection_sort_recur(arr, start_index=0):
     
     # Recursively sort the remaining elements
     selection_sort_recur(arr, start_index + 1)
+
+#  Quick Sort Recursive version
+def quick_sort_recursive(lst, descending=False):
+    if len(lst) <= 1: # Base case: a list of length 0 or 1 is already sorted
+        return lst
+    else:
+        pivot = lst[0] # Choose the first element as the pivot
+        less = []
+        greater = []
+        for i in lst[1:]: # Compare each element to the pivot and partition the list into two sublists
+            if i >= pivot if descending else i <= pivot:
+                less.append(i) 
+            else:
+                greater.append(i)
+        return quick_sort_recursive(less, descending) + [pivot] + quick_sort_recursive(greater, descending)
+
+# Quick Sort Iterative version
+def partition(arr, low, high, descending=False): # Helper function for the iterative quicksort
+    i = low - 1 # Index of smaller element
+    pivot = arr[high] # Choose the last element as the pivot
+    
+    for j in range(low, high): # Traverse through all elements in the current subarray
+        if arr[j] >= pivot if descending else arr[j] <= pivot: # Compare each element to the pivot and partition the list into two sublists
+            i += 1
+            arr[i], arr[j] = arr[j], arr[i] # Swap elements
+            
+    arr[i + 1], arr[high] = arr[high], arr[i + 1] # Swap the pivot element with the element at index i + 1
+    return i + 1
+
+
+def quick_sort_iterative(arr, descending=False):
+    if len(arr) <= 1: 
+        return arr
+
+    low = 0
+    high = len(arr) - 1
+    stack = []
+    
+    stack.append(low) 
+    stack.append(high)
+    
+    while stack: # Continue until the stack is empty
+        high = stack.pop()
+        low = stack.pop()
+        
+        p = partition(arr, low, high, descending)
+
+        if p - 1 > low:
+            stack.append(low)
+            stack.append(p - 1)
+
+        if p + 1 < high:
+            stack.append(p + 1)
+            stack.append(high)
+
+    return arr
