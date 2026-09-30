@@ -26,6 +26,8 @@ def filter_mt_cells(anndata_obj, mt_exp_lvl_threshold, gene_exp_threshold):
     )
 
     algorithms = {
+	"Selection recurisve": timer_decorator(selection_sort_recur),
+	"Selection iterative": timer_decorator(selection_sort_iter),
     "Merge recursive": timer_decorator(merge_sort_recursive),
     "Merge iterative":timer_decorator(merge_sort_iterative),
     }
