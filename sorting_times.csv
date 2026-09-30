@@ -1,0 +1,5 @@
+algorithm,stage,number_of_cells,seconds
+Merge recursive,percent_mito descending,700,0.0007939999995869584
+Merge recursive,n_genes ascending,700,0.0008115000018733554
+Merge iterative,percent_mito descending,700,0.0009158749962807633
+Merge iterative,n_genes ascending,700,0.0009446250041946769
