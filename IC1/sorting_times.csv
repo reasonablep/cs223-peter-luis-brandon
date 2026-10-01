@@ -1,5 +1,17 @@
 algorithm,stage,number_of_cells,seconds
-Merge recursive,percent_mito descending,700,0.0007939999995869584
-Merge recursive,n_genes ascending,700,0.0008115000018733554
-Merge iterative,percent_mito descending,700,0.0009158749962807633
-Merge iterative,n_genes ascending,700,0.0009446250041946769
+Selection recurisve,percent_mito descending,700,0.014344541996251792
+Selection recurisve,n_genes ascending,700,0.014799167009186931
+Selection iterative,percent_mito descending,700,0.014782665995880961
+Selection iterative,n_genes ascending,700,0.01522070799546782
+Merge recursive,percent_mito descending,700,0.0008155839896062389
+Merge recursive,n_genes ascending,700,0.0007903329969849437
+Merge iterative,percent_mito descending,700,0.0009046670020325109
+Merge iterative,n_genes ascending,700,0.0009135419968515635
+Quick recursive,percent_mito descending,700,0.00047812500270083547
+Quick recursive,n_genes ascending,700,0.0005369580030674115
+Quick iterative,percent_mito descending,700,0.0004946670087520033
+Quick iterative,n_genes ascending,700,0.0005080840055597946
+Insertion recursive,percent_mito descending,700,0.007840582999051549
+Insertion recursive,n_genes ascending,700,0.0073756659985519946
+Insertion iterative,percent_mito descending,700,0.007098707996192388
+Insertion iterative,n_genes ascending,700,0.006807583005866036

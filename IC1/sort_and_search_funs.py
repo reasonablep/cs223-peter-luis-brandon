@@ -255,3 +255,25 @@ def insertion_sort_recur(arr, n=None, key=lambda x: x, reverse=False):
     arr[j + 1] = last_item
     
     return arr
+
+
+#Binary search algorithm is not used in ICE1 file, so it is not timed
+def BINARY_SEARCH(A, v):
+	low = 1
+	high = len(A)
+	
+	while low <= high:
+		mid = (low+high)//2
+
+		if A[mid] == v:
+			return mid
+		elif A[mid] < v:
+			low = mid+1
+		else:
+			high = mid-1
+	return None
+
+num = [1, 5, 19, 30, 33, 49, 53]
+search_result = BINARY_SEARCH(num, 30)
+print("Found v at index:", search_result)
+
