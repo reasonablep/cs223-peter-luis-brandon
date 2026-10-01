@@ -1,3 +1,5 @@
+# coding: utf-8
+
 import anndata as ad
 import pandas as pd
 from sort_and_search_funs import *
@@ -142,3 +144,7 @@ if __name__ == "__main__":
     timing_table.to_csv("sorting_times.csv", index=False)
 
     
+if __name__ == "__main__":
+	main()
+else:
+	print("ice1_analysis_PM_LA_BS.py : Is intended to be executed and not imported.")
