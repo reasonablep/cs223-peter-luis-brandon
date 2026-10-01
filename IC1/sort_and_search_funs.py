@@ -115,50 +115,62 @@ def selection_sort_recur(arr, key=None, reverse=False):
     return arr
 
 #  Quick Sort Recursive version
-def quick_sort_recursive(lst, descending=False):
+def quick_sort_recursive(lst, key=lambda x: x, reverse=False):
     if len(lst) <= 1: # Base case: a list of length 0 or 1 is already sorted
         return lst
     else:
-        pivot = lst[0] # Choose the first element as the pivot
+        pivot = lst[0]
+        pivot_val = key(pivot) # Extract the comparison value using the key function
         less = []
         greater = []
-        for i in lst[1:]: # Compare each element to the pivot and partition the list into two sublists
-            if i >= pivot if descending else i <= pivot:
-                less.append(i) 
+        
+        for i in lst[1:]:
+            i_val = key(i) # Extract the comparison value for the current element
+            
+            # Compare based on the reverse flag
+            if i_val >= pivot_val if reverse else i_val <= pivot_val:
+                less.append(i)
             else:
                 greater.append(i)
-        return quick_sort_recursive(less, descending) + [pivot] + quick_sort_recursive(greater, descending)
+                
+        # Recursively sort and combine, forwarding the key and reverse arguments
+        return (quick_sort_recursive(less, key, reverse) 
+                + [pivot] 
+                + quick_sort_recursive(greater, key, reverse))
+
 
 # Quick Sort Iterative version
-def partition(arr, low, high, descending=False): # Helper function for the iterative quicksort
+def partition(arr, low, high, key=lambda x: x, reverse=False): # Helper function for the iterative quicksort
     i = low - 1 # Index of smaller element
     pivot = arr[high] # Choose the last element as the pivot
-    
+    pivot_val = key(pivot)
+
     for j in range(low, high): # Traverse through all elements in the current subarray
-        if arr[j] >= pivot if descending else arr[j] <= pivot: # Compare each element to the pivot and partition the list into two sublists
+        j_val = key(arr[j])
+        if j_val >= pivot_val if reverse else j_val <= pivot_val: # Compare each element to the pivot
             i += 1
             arr[i], arr[j] = arr[j], arr[i] # Swap elements
-            
+
     arr[i + 1], arr[high] = arr[high], arr[i + 1] # Swap the pivot element with the element at index i + 1
     return i + 1
 
 
-def quick_sort_iterative(arr, descending=False):
-    if len(arr) <= 1: 
+def quick_sort_iterative(arr, key=lambda x: x, reverse=False):
+    if len(arr) <= 1:
         return arr
 
     low = 0
     high = len(arr) - 1
     stack = []
-    
-    stack.append(low) 
+
+    stack.append(low)
     stack.append(high)
-    
+
     while stack: # Continue until the stack is empty
         high = stack.pop()
         low = stack.pop()
-        
-        p = partition(arr, low, high, descending)
+
+        p = partition(arr, low, high, key, reverse)
 
         if p - 1 > low:
             stack.append(low)
@@ -168,4 +180,41 @@ def quick_sort_iterative(arr, descending=False):
             stack.append(p + 1)
             stack.append(high)
 
+    return arr
+
+def insertion_sort_iter(arr, key=lambda x: x, reverse=False):
+    n = len(arr)
+    for i in range(1, n):
+        current_item = arr[i] 
+        current_val = key(current_item)
+        j = i - 1
+        
+        # Move elements that don't match the sort order to one position ahead
+        while j >= 0 and (key(arr[j]) < current_val if reverse else key(arr[j]) > current_val):
+            arr[j + 1] = arr[j]
+            j -= 1
+        arr[j + 1] = current_item
+    return arr
+
+def insertion_sort_recur(arr, n=None, key=lambda x: x, reverse=False):
+    if n is None:
+        n = len(arr)
+        
+    # Base case: already sorted
+    if n <= 1:
+        return arr
+        
+    # Sort first n-1 elements
+    insertion_sort_recur(arr, n - 1, key, reverse)
+    
+    # Insert the last element at its correct position in the sorted array
+    last_item = arr[n - 1]
+    last_val = key(last_item)
+    j = n - 2
+    
+    while j >= 0 and (key(arr[j]) < last_val if reverse else key(arr[j]) > last_val):
+        arr[j + 1] = arr[j]
+        j -= 1
+    arr[j + 1] = last_item
+    
     return arr
