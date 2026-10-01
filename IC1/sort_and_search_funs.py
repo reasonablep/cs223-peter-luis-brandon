@@ -1,3 +1,5 @@
+# coding: utf-8
+
 # Helper function
 
 def merge(left, right, key, reverse=False):
@@ -277,3 +279,5 @@ num = [1, 5, 19, 30, 33, 49, 53]
 search_result = BINARY_SEARCH(num, 30)
 print("Found v at index:", search_result)
 
+if __name__ == '__main__':
+    print("The module named sort_and_search_funs.py is intended to be imported and not executed.")
