@@ -56,41 +56,63 @@ def merge_sort_iterative(A, key=lambda x: x, reverse=False):
 
     return result
 
-def selection_sort_iter(arr):
+# Selection Sorting (iterative)
+def selection_sort_iter(arr, key=None, reverse=False):
+    if key is None:
+        key = lambda x: x
+
     n = len(arr)
-    # Loop through the entire array except the last element
-    for i in range(n - 1): # 
-        # Assume the current position holds the minimum value
-        min_index = i
-        
-        # Scan the remaining unsorted region to find the actual minimum
+
+    for i in range(n - 1):
+        selected_index = i
+
         for j in range(i + 1, n):
-            if arr[j] < arr[min_index]:
-                min_index = j
-                
-        # Swap the found minimum element with the first unsorted element
-        arr[i], arr[min_index] = arr[min_index], arr[i]
-        
+            if reverse:
+                if key(arr[j]) > key(arr[selected_index]):
+                    selected_index = j
+            else:
+                if key(arr[j]) < key(arr[selected_index]):
+                    selected_index = j
+
+        arr[i], arr[selected_index] = (
+            arr[selected_index],
+            arr[i]
+        )
+
     return arr
 
-def selection_sort_recur(arr, start_index=0):
-    n = len(arr)
-    
-    # Base Case: If we have reached the last element, the array is sorted
-    if start_index >= n - 1:
-        return
-    
-    # Find the index of the minimum element in the unsorted sub-array
-    min_index = start_index
-    for i in range(start_index + 1, n):
-        if arr[i] < arr[min_index]:
-            min_index = i
-            
-    # Swap the found minimum element with the first element of this sub-array
-    arr[start_index], arr[min_index] = arr[min_index], arr[start_index]
-    
-    # Recursively sort the remaining elements
-    selection_sort_recur(arr, start_index + 1)
+# Selection Sorting (recursive)
+def selection_sort_recur(arr, key=None, reverse=False):
+    if key is None:
+        key = lambda x: x
+
+    def sort_recursive(start_index):
+        n = len(arr)
+
+        # Base case
+        if start_index >= n - 1:
+            return
+
+        selected_index = start_index
+
+        for i in range(start_index + 1, n):
+            if reverse:
+                if key(arr[i]) > key(arr[selected_index]):
+                    selected_index = i
+            else:
+                if key(arr[i]) < key(arr[selected_index]):
+                    selected_index = i
+
+        arr[start_index], arr[selected_index] = (
+            arr[selected_index],
+            arr[start_index]
+        )
+
+        sort_recursive(start_index + 1)
+
+    sort_recursive(0)
+
+    return arr
 
 #  Quick Sort Recursive version
 def quick_sort_recursive(lst, descending=False):
