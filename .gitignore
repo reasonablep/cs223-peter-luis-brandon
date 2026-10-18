@@ -4,4 +4,8 @@ venv/
 .venv/
 .DS_Store
 *.h5ad
+data
+/data
+raw
+/raw
 .Rhistory
