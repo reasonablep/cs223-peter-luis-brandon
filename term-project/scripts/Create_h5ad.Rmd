@@ -1,0 +1,35 @@
+---
+title: "Untitled"
+output: html_document
+date: "2026-10-29"
+---
+
+```{r}
+library(Seurat)
+library(scCustomize)
+```
+
+```{r}
+data_dir <- "H:\\CS 223 Feedback\\Project\\data\\raw"
+```
+
+```{r}
+data <- Read10X(data_dir, gene.column = 1)
+```
+
+```{r}
+seu <- CreateSeuratObject(counts = data)
+```
+
+```{r}
+as.anndata(
+  x = seu,
+  file_path = "H:\\CS 223 Feedback\\Project\\data",
+  file_name = "output_file.h5ad",
+  assay = "RNA",
+  main_layer = "counts",  # Directs the function to your only available layer
+  other_layers = NULL     # Prevents it from looking for secondary layers
+)
+
+```
+
